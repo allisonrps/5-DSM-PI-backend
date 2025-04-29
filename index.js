@@ -1,31 +1,34 @@
-const express = require("express"); // importando o express
-const app = express(); // definindo o objeto app como express
-const bodyParser = require("body-parser"); // importando o body-parser
-const connection = require("./database/connection"); // conexao com banco de dados
-const porta = 4000; // porta que vai rodar a aplicação
-const question = require("./question/Question"); // controller de perguntas
+const express = require("express");
+const bodyParser = require("body-parser");
+const connection = require("./database/connection"); // conexão com banco
+const app = express();
+const porta = 3000;
 
+// Importação das rotas (controllers)
+const homeController = require("./home/homeController");
+const perguntaRoutes = require("./routes/Pergunta");
+const usuarioRoutes = require("./routes/Usuario");
+const respostaRoutes = require("./routes/Resposta");
+const resultadoRoutes = require("./routes/Resultado");
 
-// definindo a view principal do express com ejs
+// View engine
 app.set('view engine', 'ejs');
 
-// definindo a pasta publica de arquivos estáticos
+// Arquivos estáticos
 app.use(express.static('public'));
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+// Middlewares
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-// parse application/json
-app.use(bodyParser.json())
+// Rotas
+app.use("/", homeController);
+app.use("/perguntas", perguntaRoutes);
+app.use("/usuarios", usuarioRoutes);
+app.use("/respostas", respostaRoutes);
+app.use("/resultados", resultadoRoutes);
 
-// definindo a rota principal atraves de um controller
-const homeController = require("./home/homeController");
-const questionController = require("./question/QuestionController");
-
-app.use("/",homeController);
-app.use("/",questionController);
-
-// escutando a porta tornando a aplicação acessível
-app.listen(porta, ()=> {
-    console.log("conectado na porta: " + porta);
-})
+// Start do servidor
+app.listen(porta, () => {
+    console.log("Servidor rodando na porta: " + porta);
+});
