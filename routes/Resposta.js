@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const usuarioController = require('../controllers/Resposta');
+const Resposta = require('../controllers/Resposta');
 
+// ROTAS
+router.get('/', Resposta.listarTodas);
 router.post('/', Resposta.criarResposta);
-router.get('/', Resposta.listarResposta);
 
 module.exports = router;

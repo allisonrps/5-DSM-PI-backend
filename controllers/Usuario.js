@@ -1,17 +1,19 @@
-const express = require('express');
-const router = express.Router();
 const connection = require('../database/connection');
 
-// RETORNA JSON DE TODAS AS PERGUNTAS
-router.get("/usuario", (req,res) => {
+module.exports = {
+    listarTodos: (req, res) => {
+        connection.query("SELECT * FROM usuarios", (err, result) => {
+            if (err) return res.status(500).json({ error: "Erro ao listar usuários" });
+            return res.status(200).json({ usuarios: result });
+        });
+    },
 
-    var SQL = "SELECT * FROM usuarios ORDER BY id DESC";
-    
-    connection.query(SQL, function(err,result) {
-        if (err) {
-            res.sendStatus(401).json({err: "Erro ao listar usuários"});
-        }
-        res.status(200).json({perguntas: result});
-    })
-
-})
+    criarUsuario: (req, res) => {
+        const { nome, email } = req.body;
+        const SQL = "INSERT INTO usuarios (nome, email) VALUES (?, ?)";
+        connection.query(SQL, [nome, email], (err, result) => {
+            if (err) return res.status(500).json({ error: "Erro ao criar usuário" });
+            return res.status(201).json({ message: "Usuário criado", id: result.insertId });
+        });
+    }
+};

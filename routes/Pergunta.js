@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const usuarioController = require('../controllers/Pergunta');
+const Pergunta = require('../controllers/Pergunta');
 
+// ROTAS
+router.get('/', Pergunta.listarTodas);
 router.post('/', Pergunta.criarPergunta);
-router.get('/', Pergunta.listarPergunta);
+
 module.exports = router;

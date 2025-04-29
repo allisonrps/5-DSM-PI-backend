@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const usuarioController = require('../controllers/Usuario');
+const Usuario = require('../controllers/Usuario');
 
+// ROTAS
+router.get('/', Usuario.listarTodos);
 router.post('/', Usuario.criarUsuario);
-router.get('/', Usuario.listarUsuarios);
 
 module.exports = router;
