@@ -1,18 +1,19 @@
 {
   "name": "nodetest",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "mysql2": "^3.14.0",
     "nodetest": "file:"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

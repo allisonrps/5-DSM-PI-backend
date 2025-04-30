@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const connection = require("./database/connection"); // conexão com banco
 const app = express();
 const porta = 3000;
+require('dotenv').config();
+
 
 // Importação das rotas (controllers)
 const homeController = require("./home/homeController");
