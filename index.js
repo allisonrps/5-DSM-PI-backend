@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const connection = require("./database/connection"); // conexão com banco
 const app = express();
+const cors = require("cors");
 const porta = process.env.PORT || 4000;
 require('dotenv').config();
 
@@ -13,11 +15,15 @@ const usuarioRoutes = require("./routes/Usuario");
 const respostaRoutes = require("./routes/Resposta");
 const resultadoRoutes = require("./routes/Resultado");
 
+
 // View engine
 app.set('view engine', 'ejs');
 
 // Arquivos estáticos
 app.use(express.static('public'));
+
+//Habilita CORS
+app.use(cors());
 
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
