@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const connection = require("./database/connection"); // conexão com banco
 const app = express();
-const porta = 3000;
+const porta = process.env.PORT || 4000;
 require('dotenv').config();
 
 
