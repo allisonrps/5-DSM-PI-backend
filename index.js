@@ -1,14 +1,15 @@
-require('dotenv').config();
+require('dotenv').config(); // Primeira linha SEMPRE
+
 const express = require("express");
-const bodyParser = require("body-parser");
-const connection = require("./database/connection"); // conexão com banco
-const app = express();
 const cors = require("cors");
+const bodyParser = require("body-parser");
+const app = express();
 const porta = process.env.PORT || 4000;
-require('dotenv').config();
+
+const connection = require("./database/connection");
 
 
-// Importação das rotas (controllers)
+// Importação das rotas
 const homeController = require("./home/homeController");
 const perguntaRoutes = require("./routes/Pergunta");
 const usuarioRoutes = require("./routes/Usuario");
@@ -40,3 +41,8 @@ app.use("/resultados", resultadoRoutes);
 app.listen(porta, () => {
     console.log("Servidor rodando na porta: " + porta);
 });
+
+// Rota padrão para teste rápido
+app.get("/ping", (req, res) => {
+    res.json({ status: "ok" });
+  });
