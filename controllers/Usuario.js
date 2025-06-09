@@ -12,7 +12,6 @@ module.exports = {
     },
 
 
-
     usuarioPorId: (req, res) => {
         const { id } = req.params;
 
